@@ -7,9 +7,66 @@
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 </head>
 <body>
-    <p>key</p>
-    <p>info</p>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'img/foo.png' %}" width="35" height="30" class="d-inline-block align-text-top">
+                exm0
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">key</h5>
+                        <div class="input-group">
+                            <span class="input-group-text">Key</span>
+                            <input type="text" class="form-control" id="key" placeholder="Enter key">
+                            <button type="button" class="btn btn-primary" onclick="sendKey()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 id="header_info" class="card-title">Info</h5>
+                        <pre id="messages_list"></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+
+    <script>
+        let soccket = new WebSocket(
+            'ws://' + window.location.host + '/ws/echo/'
+        );
+
+        soccket.onclose = function(e) {
+            console.error('Socket closed unexpectedly');
+        };
+
+        function sendKey() {
+            soccket.send(document.getElementById('key').value);
+        }
+
+        soccket.onmessage =function (e) {
+            {# Header #}
+            let header = document.getElementById('key').value
+            $('#header_info').html(header);
+
+            {# Info #}
+            var message = e.data;
+            $('#messages_list').text(message);
+        }
+        //#sourceMappingURL={% static 'js/bootstrap.min.js.map' %}
+    </script>
 </body>
 </html>
