@@ -27,6 +27,7 @@ class EchoInfo(WebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None):
         print(text_data)
 
+        # separate text_data/selected_data ==> css/www
         selected_data = ''
         index = text_data.find('/')
         if index != -1:
@@ -35,8 +36,10 @@ class EchoInfo(WebsocketConsumer):
             # subject
             text_data = text_data[:text_data.find('/')]
 
+        # read text_data section from file and return list of them
         data = get_list('/home/mohsen/Dropbox/_2021/core.txt', ('[' + text_data + ']' + '\n'))
 
+        # select selected_data from text_data
         if selected_data != '':
             selected_d = ''
             read_status = '1'
