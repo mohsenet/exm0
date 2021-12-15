@@ -1,0 +1,35 @@
+div {
+    --primary: #369;
+    --secondary: #adf;
+    width: 300px;
+    aspect-ratio: 1;
+    /*background: red; */
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+div::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: conic-gradient(var(--primary) calc(var(--value) * 1%), var(--secondary) 0);
+    -webkit-mask: radial-gradient(#0000 55%, #000 0);
+}
+
+div::after {
+    counter-reset: percentage var(--value);
+    content: counter(percentage) "%";
+    font-family: Arial, sans-serif;
+    font-size: 3rem;
+    color: var(--primary);
+}
+
+html {
+    /*background: green; */
+}

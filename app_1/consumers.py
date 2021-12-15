@@ -26,7 +26,7 @@ class EchoInfo(WebsocketConsumer):
 
     def receive(self, text_data=None, bytes_data=None):
         print(text_data)
-        data = get_list('/home/mohsen/Dropbox/_2021/core.txt', (text_data + '\n'))
+        data = get_list('/home/mohsen/Dropbox/_2021/core.txt', ('[' + text_data + ']' + '\n'))
 
         d = ''
         for i in data:

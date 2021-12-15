@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>progressbar</title>
+    <link rel="stylesheet" href="{% static 'css/progressbar.css' %}">
+</head>
+<body>
+    <div style="--value: 60"></div>
+    <input type="text" id="v1">
+    <input type="text" id="v2">
+
+    <script src="{% static 'js/jquery-3.6.0.min.js' %}"></script>
+    <script>
+        $( "input" ).keyup(function() {
+            var value = $( this ).val();
+            $("div").css('--value', value);
+        }).keyup();
+
+        $("#v2").val('100');
+
+        console.log('text');
+    </script>
+</body>
+</html>
